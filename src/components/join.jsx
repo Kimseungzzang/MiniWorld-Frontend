@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/join.css';
 
-const JoinForm = () => {
+const JoinForm = ({onFormToggle}) => {
     const [email, setEmail] = useState('');
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
@@ -73,7 +73,9 @@ const JoinForm = () => {
                 /><br/><br/>
 
                 <button type="submit">Join</button>
+             
             </form>
+            <button onClick={onFormToggle}>go to Login</button>
         </div>
     );
 };

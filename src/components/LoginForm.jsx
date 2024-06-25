@@ -1,18 +1,16 @@
-
 import React, { useState } from 'react';
 import '../css/LoginForm.css';
 
-const LoginForm = () => {
+const LoginForm = ({onFormToggle}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
     try {
-      const response = await fetch('api/login', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,9 +19,14 @@ const LoginForm = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Login successful:', data);
-       
+        const token = response.headers.get('Authorization');
+        if (token) {
+          localStorage.setItem('token', token);
+          console.log(token);
+          window.location.reload();
+        } else {
+          console.error('Token not found in the response headers.');
+        }
       } else {
         console.error('Login failed:', response.statusText);
       }
@@ -37,9 +40,9 @@ const LoginForm = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-          <label>Username:</label>
+          <label>Email:</label>
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -55,7 +58,10 @@ const LoginForm = () => {
           />
         </div>
         <button type="submit">Login</button>
+     
       </form>
+      <button onClick={onFormToggle}>go to Join</button>
+
     </div>
   );
 };

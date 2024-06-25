@@ -1,0 +1,17 @@
+.post-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .post-detail-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .post-detail-container p {
+    margin: 10px 0;
+    color: #666;
+  }
+  
