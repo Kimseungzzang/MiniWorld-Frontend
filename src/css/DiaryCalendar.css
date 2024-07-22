@@ -1,0 +1,35 @@
+/* DiaryCalendar.css */
+
+/* 전체 달력 컨테이너 */
+.react-calendar {
+    max-width: 200px;
+    max-height: 200px;
+    background-color: rgb(84,178,212);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 달력 헤더 (년월) */
+  .react-calendar__navigation {
+    background-color: #4682b4;
+    color: black;
+    font-size: 11px;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  /* 날짜 타일 (날짜 영역) */
+  .react-calendar__tile {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid black;
+    cursor: pointer;
+    
+  }
+  
+  /* 선택된 날짜 타일 */
+  .react-calendar__tile--active {
+    background-color: #4682b4;
+    color: black;
+  }

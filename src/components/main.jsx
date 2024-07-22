@@ -1,45 +1,49 @@
 // src/components/Main.js
 import React, { useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode'; // Ensure jwtDecode is imported correctly
-import LoginForm from './LoginForm';
-import JoinForm from './join';
+import { useNavigate } from 'react-router-dom';
 import '../css/main.css';
 
+import Home from './home';
+import PostList from './PostList';
+import DiaryList from './DiaryList';
+
 const Main = () => {
-  const [nickname, setNickname] = useState('');
-  const [showLoginForm, setShowLoginForm] = useState(true);
+  
+  const [currentPage, setCurrentPage] = useState('home'); // State for current page
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
-      const decoded = jwtDecode(token);
-      console.log(decoded);
-      setNickname(decoded.nickname);
-      console.log(nickname);
-    }
-  }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setNickname('');
-    window.location.reload();  // Refresh the page to show the login form again
+  const handleButtonClick = (page) => {
+    setCurrentPage(page); // Set current page based on button click
   };
 
-  const handleFormToggle = () => {
-    setShowLoginForm((prev) => !prev);
+  const renderContent = () => {
+    if (currentPage === 'home') {
+      return <Home />;
+    } else if(currentPage==='guestbook'){
+      return (
+        <PostList></PostList>
+      );
+    }
+    else if(currentPage==='diary'){
+      return (
+        <DiaryList/>
+      );
+    }
   };
 
   return (
     <div className="main-container">
-      <div className="username-display">
-        {nickname ? `Welcome, ${nickname}` : 'Not logged in'}
+      <div className="content">
+      {renderContent()}
       </div>
-      {nickname && <button onClick={handleLogout}>Logout</button>}
-      {!nickname && showLoginForm && <LoginForm onFormToggle={handleFormToggle}/>}
-      {!nickname && !showLoginForm && <JoinForm onFormToggle={handleFormToggle}/>}
-      
-      <h1>Welcome to Our Service</h1>
+      <div className='button-container'>
+            <button onClick={() => handleButtonClick('home')}>홈</button>
+            <button onClick={() => handleButtonClick('profile')}>프로필</button>
+            <button onClick={() => handleButtonClick('diary')}>다이어리</button>
+            <button onClick={() => handleButtonClick('jukebox')}>쥬크박스</button>
+            <button onClick={() => handleButtonClick('guestbook')}>방명록</button>
+          </div>
+      <img src="/images/background.png" alt="Overlay" className="overlay-image" />
     </div>
   );
 };

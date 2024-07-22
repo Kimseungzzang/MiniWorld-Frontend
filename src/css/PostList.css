@@ -1,9 +1,15 @@
 /* 기본 컨테이너 스타일 */
 .post-list-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+   
+  border-radius: 10px; /* 모서리 둥글게 */
+  width: 100%; /* 컨테이너 너비 */
+  height: 60vh; /* 컨테이너 높이 */
+  margin-right: 400px;
     font-family: Arial, sans-serif;
+    overflow-y: scroll; 
+    border: 2px solid gray; 
+    background: rgba(255, 255, 255, 0.8); /* 배경색 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
   }
   
   /* 게시물 목록 제목 스타일 */
